@@ -66,7 +66,7 @@ namespace applernnewwords
             {
                 
 
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM word"))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM words", cn))
                 {
 
                     cn.Open();
