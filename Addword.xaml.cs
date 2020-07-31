@@ -76,6 +76,7 @@ namespace applernnewwords
             else if (englword.Text == "") { erreor.Content = "            введіть англійське слово"; }
             else
             {
+                 
                 MessageBox.Show("слово додано!");
                 erreor.Content = "    ";
                 Myword g = new Myword();
@@ -88,18 +89,19 @@ namespace applernnewwords
 
               
                 string CommandText = "INSERT INTO words (ukr,en) VALUES ('" + ukrword.Text + "','" + englword.Text + "');";
-                using (MySqlConnection myConnection = new MySqlConnection(cs))
-                {
-
-                    using (MySqlCommand myCommand = new MySqlCommand(CommandText, myConnection))
+                    using (MySqlConnection myConnection = new MySqlConnection(cs))
                     {
 
-                        myConnection.Open();
+                        using (MySqlCommand myCommand = new MySqlCommand(CommandText, myConnection))
+                        {
 
-                        myCommand.ExecuteNonQuery();
+                            myConnection.Open();
 
+                            myCommand.ExecuteNonQuery();
+
+                        }
                     }
-                }
+                
             }
         }
       

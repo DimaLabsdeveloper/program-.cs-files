@@ -61,33 +61,39 @@ namespace applernnewwords
 
             string cs = @"server=localhost;userid=admin;password=admin;database=word";
 
-            
-            using (MySqlConnection cn = new MySqlConnection(cs))
+            int uk = 1;
+            try
             {
-                
-
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM words", cn))
+                using (MySqlConnection cn = new MySqlConnection(cs))
                 {
+                    uk++;
 
-                    cn.Open();
-                    cmd.ExecuteNonQuery();
-                    using (SqlDataReader dataReader = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM words WHERE id = 8 ", cn))
                     {
 
-                        if (dataReader.HasRows)
+                        cn.Open();
+
+                        using (MySqlDataReader dataReader = cmd.ExecuteReader())
                         {
-                          
-                            while (dataReader.Read())
+
+                            if (dataReader.HasRows)
                             {
-                                englbutton.Content =(dataReader.GetString(0));
+
+                                while (dataReader.Read())
+                                {
+                                    englbutton.Content = (dataReader.GetString(1));
+                                }
+
                             }
-                            
                         }
                     }
                 }
+
             }
-
-
+            catch {
+                englbutton.Visibility = Visibility.Hidden;
+                MessageBox.Show("Ой, виникла якась проблема");
+            }
 
         }
 
@@ -115,6 +121,43 @@ namespace applernnewwords
         private void englbutton_Click(object sender, RoutedEventArgs e)
         {
 
-        }
+            string cs = @"server=localhost;userid=admin;password=admin;database=word";
+
+            int id = 1;
+            try
+            {
+                using (MySqlConnection cn = new MySqlConnection(cs))
+                {
+
+                    id++;
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM words WHERE id= 8", cn))
+                    {
+
+                        cn.Open();
+
+                        using (MySqlDataReader dataReader = cmd.ExecuteReader())
+                        {
+
+                            if (dataReader.HasRows)
+                            {
+
+                                while (dataReader.Read())
+                                {
+                                    ukrlabel.Content = (dataReader.GetString(2));
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch {
+               
+                MessageBox.Show("Ой, виникла якась проблема");
+            }    
+            
+            }
     }
 }
